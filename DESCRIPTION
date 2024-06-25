@@ -1,0 +1,17 @@
+Package: toolboxfilemagali
+Title: Continuer De S'entraîner
+Version: 0.0.0.9000
+Authors@R: 
+    person("Magali", "Dauvin", , "magali.dauvin@sciencespo.fr", role = c("aut", "cre"))
+Description: TD2 en autonomie.
+License: MIT + file LICENSE
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
+Config/fusen/version: 0.5.2
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
