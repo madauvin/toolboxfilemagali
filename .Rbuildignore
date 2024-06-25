@@ -3,4 +3,5 @@
 ^toolboxfilemagali\.Rproj$
 ^\.Rproj\.user$
 ^docs$
+^Readme\.Rmd$
 ^CODE_OF_CONDUCT\.md$
