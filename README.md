@@ -37,33 +37,10 @@ get_all_file_size(directory=".")
 #> 7                      ./man      4096
 #> 8                ./NAMESPACE       200
 #> 9                        ./R      4096
-#> 10              ./README.Rmd      1522
-#> 11                   ./tests      4096
-#> 12 ./toolboxfilemagali.Rproj       374
-#> 13               ./vignettes      4096
+#> 10               ./README.md      2181
+#> 11              ./README.Rmd      1055
+#> 12                   ./tests      4096
+#> 13 ./toolboxfilemagali.Rproj       374
+#> 14               ./vignettes      4096
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
