@@ -1,0 +1,12 @@
+Package: toolboxfilemagali
+Version: 0.0.0.9000
+Title: Continuer De S'entraîner
+Description: TD2 en autonomie.
+Authors@R: person(given = "Magali",
+       family = "Dauvin",
+       role = c("aut", "cre"),
+       email = "magali.dauvin@sciencespo.fr")
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
