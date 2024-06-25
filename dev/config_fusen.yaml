@@ -1,0 +1,13 @@
+flat_get_one_file_size.Rmd:
+  path: dev/flat_get_one_file_size.Rmd
+  state: active
+  R: R/get_one_file_size.R
+  tests: tests/testthat/test-get_one_file_size.R
+  vignettes: vignettes/get_one_file_size.Rmd
+  inflate:
+    flat_file: dev/flat_get_one_file_size.Rmd
+    vignette_name: get_one_file_size
+    open_vignette: true
+    check: true
+    document: true
+    overwrite: ask

@@ -18,33 +18,65 @@ library(testthat)
 pkgload::load_all(export_all = FALSE)
 ```
 
+
+
 # get_one_file_size
 
 ```{r function-get_one_file_size}
-#' get_one_file_size Title
+#' get_one_file_size 
 #'
-#' @return 1
+#'Récupère un fichier pour en sortir un dataframe et sa taille.
+#' @param file un nom de fichier 
+#'
+#' @return un dataframe avec son nom et sa taille
 #' @export
 #'
 #' @examples
-get_one_file_size <- function() {
-  1
+get_one_file_size <- function(file) {
+  file_size <- file.size(file)
+  
+  result <- data.frame(
+    file_name = file,
+    file_size = file_size,
+    stringsAsFactors = FALSE
+  )
+  return(result)
 }
 ```
 
 ```{r examples-get_one_file_size}
-get_one_file_size()
+temp_filename <- tempfile(fileext = ".csv")
+write.csv(iris, temp_filename, row.names = FALSE)
+get_one_file_size(temp_filename)
+
+get_one_file_size(file = "analyse_facto.Rmd")
+
 ```
 
 ```{r tests-get_one_file_size}
-test_that("get_one_file_size works", {
 
+
+# Début des tests unitaires
+test_that("get_one_file_size returns a data.frame", {
+  temp_filename <- tempfile(fileext = ".csv")
+write.csv(iris, temp_filename, row.names = FALSE)
+  result <- get_one_file_size(temp_filename)
+  expect_true(is.data.frame(result))
 })
+
+test_that("get_one_file_size returns correct file name", {
+  temp_filename <- tempfile(fileext = ".csv")
+write.csv(iris, temp_filename, row.names = FALSE)
+  result <- get_one_file_size(temp_filename)
+  expect_equal(result$file_name, temp_filename)
+})
+
+
 ```
 
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
 # Execute in the console directly
-fusen::inflate(flat_file = "dev/flat_get_one_file_size.Rmd", vignette_name = "Minimal")
+fusen::inflate(flat_file = "dev/flat_get_one_file_size.Rmd", vignette_name = "get_one_file_size")
 ```

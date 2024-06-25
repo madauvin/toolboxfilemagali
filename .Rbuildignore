@@ -1,2 +1,4 @@
 ^dev$
 ^LICENSE\.md$
+^toolboxfilemagali\.Rproj$
+^\.Rproj\.user$
