@@ -1,0 +1,84 @@
+---
+title: "flat_get_all_file_size.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(purrr)
+library(dplyr)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# get_all_file_size
+
+```{r function-get_all_file_size}
+#' get_all_file_size Title
+#' Elle prend un chemin de dossier en paramètre, et map la fonction get_one_file_size pour n’obtenir qu’un seul tableau.
+#'
+#' @param directory un chemin de dossier
+#'
+#' @return 1 tableau
+#' @export
+#' @importFrom purrr map
+#' @importfrom dplyr bind_rows
+#' @examples
+get_all_file_size <- function(directory) {
+  # Obtenir la liste des fichiers dans le répertoire
+  files <- list.files(directory, full.names = TRUE)
+  
+  # Appliquer la fonction get_one_file_size à chaque fichier
+  file_sizes <- map(files, get_one_file_size)
+  
+  # Combiner les résultats en un seul data.frame
+  result <- dplyr::bind_rows(file_sizes)
+  
+  return(result)
+}
+```
+
+```{r examples-get_all_file_size}
+library(purrr)
+library(dplyr)
+get_all_file_size(directory = ".")
+```
+
+```{r tests-get_all_file_size}
+library(purrr)
+library(dplyr)
+temp_dir <- tempdir()
+file1 <- file.path(temp_dir, "file1.csv")
+file2 <- file.path(temp_dir, "file2.csv")
+write.csv(iris, file1, row.names = FALSE)
+write.csv(mtcars, file2, row.names = FALSE)
+
+# Début des tests unitaires
+test_that("get_all_file_size returns a data.frame", {
+  result <- get_all_file_size(temp_dir)
+  expect_true(is.data.frame(result))
+})
+
+
+test_that("get_all_file_size handles empty directory", {
+  empty_dir <- tempfile()
+  dir.create(empty_dir)
+  result <- get_all_file_size(empty_dir)
+  expect_true(is.data.frame(result))
+  expect_equal(nrow(result), 0)
+  unlink(empty_dir)
+})
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_get_all_file_size.Rmd", vignette_name = "get_all_file_size")
+```
+

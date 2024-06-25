@@ -5,6 +5,9 @@ Authors@R:
     person("Magali", "Dauvin", , "magali.dauvin@sciencespo.fr", role = c("aut", "cre"))
 Description: TD2 en autonomie.
 License: MIT + file LICENSE
+Imports: 
+    dplyr,
+    purrr
 Suggests: 
     knitr,
     rmarkdown,
