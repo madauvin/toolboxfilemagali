@@ -2,4 +2,7 @@
 
 export(get_all_file_size)
 export(get_one_file_size)
+export(search_folder_size)
+importFrom(dplyr,bind_rows)
+importFrom(dplyr,filter)
 importFrom(purrr,map)

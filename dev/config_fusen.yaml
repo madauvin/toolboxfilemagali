@@ -24,3 +24,16 @@ flat_get_one_file_size.Rmd:
     check: true
     document: true
     overwrite: ask
+flat_search_folder_size.Rmd:
+  path: dev/flat_search_folder_size.Rmd
+  state: active
+  R: R/search_folder_size.R
+  tests: tests/testthat/test-search_folder_size.R
+  vignettes: vignettes/search-folder-size.Rmd
+  inflate:
+    flat_file: dev/flat_search_folder_size.Rmd
+    vignette_name: search folder size
+    open_vignette: true
+    check: true
+    document: true
+    overwrite: ask
