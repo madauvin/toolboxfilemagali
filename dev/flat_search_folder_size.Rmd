@@ -1,0 +1,102 @@
+---
+title: "flat_search_folder_size.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(dplyr)
+library(purrr)
+```
+
+```{r development-load}
+# Load already included functions if relevant
+pkgload::load_all(export_all = FALSE)
+```
+
+# search_folder_size
+
+```{r function-search_folder_size}
+#' search_folder_size Title
+#' Elle prend en paramètre un nom de dossier et une taille, et donne le tableau avec la taille des objets après avoir filtrée les fichiers plus grands que la taille.
+#' @param directory nom de dossier
+#' @param size_threshold seuil de taille des objets
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows filter
+#' @return un tableau avec deux colonnes
+#' @export
+#' 
+#' @examples
+search_folder_size <- function(directory, size_threshold) {
+  # Obtenir les tailles de tous les fichiers dans le dossier
+  all_files <- get_all_file_size(directory)
+  
+  # Filtrer les fichiers dont la taille est supérieure au seuil spécifié
+  filtered_files <- all_files |> 
+    filter(file_size > size_threshold)
+  
+  return(filtered_files)
+}
+
+```
+
+```{r examples-search_folder_size}
+library(dplyr)
+library(purrr)
+temp_dir <- tempdir()
+file1 <- file.path(temp_dir, "file1.csv")
+file2 <- file.path(temp_dir, "file2.csv")
+write.csv(iris, file1, row.names = FALSE)
+write.csv(mtcars, file2, row.names = FALSE)
+
+# Utiliser la fonction search_folder_size avec un seuil de 1000 octets
+result <- search_folder_size(temp_dir, 1000)
+print(result)
+
+# Supprimer les fichiers temporaires après utilisation
+unlink(file1)
+unlink(file2)
+```
+
+```{r tests-search_folder_size}
+
+test_that("search_folder_size returns a data.frame", {
+  temp_dir <- tempdir()
+file1 <- file.path(temp_dir, "file1.csv")
+file2 <- file.path(temp_dir, "file2.csv")
+file3 <- file.path(temp_dir, "file3.csv")
+write.csv(iris, file1, row.names = FALSE)
+write.csv(mtcars, file2, row.names = FALSE)
+write.csv(head(mtcars), file3, row.names = FALSE)  # Plus petit fichier
+
+  result <- search_folder_size(temp_dir, 1000)
+  expect_true(is.data.frame(result))
+})
+
+test_that("search_folder_size handles no files above threshold", {
+   temp_dir <- tempdir()
+file1 <- file.path(temp_dir, "file1.csv")
+file2 <- file.path(temp_dir, "file2.csv")
+file3 <- file.path(temp_dir, "file3.csv")
+write.csv(iris, file1, row.names = FALSE)
+write.csv(mtcars, file2, row.names = FALSE)
+write.csv(head(mtcars), file3, row.names = FALSE)  # Plus petit fichier
+
+  result <- search_folder_size(temp_dir, 100000)
+  expect_equal(nrow(result), 0)
+})
+
+
+
+
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_search_folder_size.Rmd", vignette_name = "search folder size")
+```
+
